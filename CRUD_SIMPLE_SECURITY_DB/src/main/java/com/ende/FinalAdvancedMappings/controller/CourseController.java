@@ -1,14 +1,18 @@
 package com.ende.FinalAdvancedMappings.controller;
 
-import com.ende.FinalAdvancedMappings.entity.Course;
-import com.ende.FinalAdvancedMappings.entity.Professor;
-import com.ende.FinalAdvancedMappings.entity.Student;
-import com.ende.FinalAdvancedMappings.service.ProfessorService;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import com.ende.FinalAdvancedMappings.entity.Course;
+import com.ende.FinalAdvancedMappings.entity.Professor;
+import com.ende.FinalAdvancedMappings.service.ProfessorService;
 
 @Controller
 public class CourseController {
@@ -59,5 +63,12 @@ public class CourseController {
         Course course = profService.findCourseById(theId);
         theModel.addAttribute("course", course);
         return "course/course-add-update";
+    }
+
+    @GetMapping("/viewAllCourses")
+    public String viewAllCourses(Model model){
+        List<Course> courses = profService.findAllCourses();
+        model.addAttribute("courses", courses);
+        return "course/all-courses";
     }
 }
