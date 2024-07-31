@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+    <link rel="stylesheet" href="/courseCss.css">
+</head>
+<body>
+<div class="container">
+    <h1>Course Details</h1>
+    <p>Id: <span th:text="${course.id}"></span></p>
+    <p>Title: <span th:text="${course.title}"></span></p>
+    <p>Professor Id: <span th:if="${course.professor != null}" th:text="${course.professor.id}"></span></p>
+    <span th:unless="${course.professor != null}">No Professor</span>
+    <span>Number of Students Enrolled: 0</span>
+    <div class="btn-container">
+        <a class="delete-btn"  th:href="@{/delete-course(courseId = ${course.id})}">Delete</a>
+        <a class="update-btn" th:href="@{/showFormForUpdateCourse(courseId = ${course.id})}">Update</a>
+    </div>
+    <br>
+    <a class="btn-primary" th:href="@{/professor-home}">Professor Home Page</a>
+</div>
+</body>
+</html>

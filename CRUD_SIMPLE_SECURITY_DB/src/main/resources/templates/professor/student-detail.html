@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="/professorCss.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Student Details</h1>
+        <p>Id: <span th:text="${student.id}"></span></p>
+        <p>First Name: <span th:text="${student.firstName}"></span></p>
+        <p>Last Name: <span th:text="${student.lastName}"></span></p>
+        <p>Email: <span th:text="${student.email}"></span></p>
+        <p>Student Details: <span th:text="${student.studentDetails}"></span></p>
+        <br>
+        <a  class="delete-btn" th:href="@{/delete-student(studentId = ${student.id})}">Delete</a>
+        <a  class="update-btn" th:href="@{/showFormForUpdateStudent(studentId = ${student.id})}">Update</a><br>
+        <a class="view-course" href="#">View Courses</a>
+        <a class="view-course" href="#">Send Message</a>
+        <a class="view-course" href="#">Give Assignment</a>
+
+        <br><br>
+        <hr>
+        <a class="btn-primary" th:href="@{/professor-home}">Professor Home Page</a>
+    </div>
+</body>
+</html>

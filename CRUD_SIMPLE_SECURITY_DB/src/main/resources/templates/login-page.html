@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        /* Body styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container styles */
+        .login-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        /* Header styles */
+        .login-title {
+            margin-bottom: 20px;
+            color: #333333;
+            font-size: 24px;
+        }
+
+        /* Form styles */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Input field styles */
+        .login-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Submit button styles */
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 5px 10px; /* Reduced padding */
+            border-radius: 5px;
+        }
+
+        /* Error message with a compact reddish background */
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.success h6 {
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h3 class="login-title">Sign In As Student or Professor</h3>
+    <form class="login-form" action="#" th:action="@{/authenticateTheUser}" method="POST">
+        <div th:if="${param.error}" class="message error">
+            <h5>Invalid username or password</h5>
+        </div>
+        <div th:if="${param.logout}" class="message success">
+            <h6>Logged out successfully</h6>
+        </div>
+        <input type="text" class="login-input" name="username" placeholder="Email" required>
+        <input type="password" class="login-input" name="password" placeholder="Password" required>
+        <input type="submit" class="login-button" th:value="Login">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+  /* Apply a background color to the entire form container */
+.container {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: #f0f0f0;
+}
+
+form-wrapper {
+background-color: #fff;
+padding: 30px;
+border-radius: 10px;
+max-width: 400px;
+width: 100%;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+font-family: 'Arial', sans-serif;
+}
+
+/* Style the form header */
+h3 {
+text-align: center;
+color: #333;
+font-size: 1.5em;
+margin-bottom: 20px;
+}
+
+/* Style the form itself */
+form {
+display: flex;
+flex-direction: column;
+}
+
+/* Style the input fields */
+input[type="text"] {
+padding: 10px;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 1em;
+transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Change the placeholder color */
+input[type="text"]::placeholder {
+color: #888;
+}
+
+/* Add focus effect to the input fields */
+input[type="text"]:focus {
+border-color: #4CAF50;
+box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+outline: none;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+padding: 10px;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 5px;
+font-size: 1em;
+cursor: pointer;
+transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Change button color on hover */
+button[type="submit"]:hover {
+background-color: #45a049;
+box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}

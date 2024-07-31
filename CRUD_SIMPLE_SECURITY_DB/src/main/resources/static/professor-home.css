@@ -1,0 +1,90 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    display: block;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: calc(100% - 40px);
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+.btn-danger{
+    background-color: #c82333;
+}
+
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.info {
+    background-color: #17a2b8; /* Set background color to Bootstrap's btn-info */
+    width:absolute
+}
+
+.success{
+background-color: #28a745;
+}
+
+#profile-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#logged-in-as {
+    display: block;
+    margin-top: 10px;
+}
+
+#logout-btn {
+    position: absolute; /* Set position to absolute */
+    bottom: 20px; /* Adjust bottom position */
+    right: 20px; /* Adjust right position */
+}

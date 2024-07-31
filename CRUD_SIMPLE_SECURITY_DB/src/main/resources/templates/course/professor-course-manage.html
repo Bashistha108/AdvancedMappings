@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<br>
+<div class="container">
+    <h3>Course Management</h3><br>
+    <input type="text" placeholder="Search Course using AI"><br><br>
+    <form action="#" th:action="@{/showFormForAddCourse}" method="GET">
+        <input class="btn btn-info" type="submit" value="Add Course +"></input>
+    </form>
+    <br>
+    <table class="table table-striped-columns">
+        <thead>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Professor Id</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <tr th:each="course: ${courses}">
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.title}"></td>
+            <td th:if="${course.professor != null}" th:text="${course.professor.id}"></td>
+            <td th:unless="${course.professor != null}">No Professor</td>
+            <td>
+                <a class="btn btn-info" th:href="@{/course-details/{id}(id=${course.id})}">View Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr>
+    <a class="btn btn-primary" th:href="@{/professor-home}">Professor Home Page</a>
+    <br><br>
+</div>
+</body>
+</html>

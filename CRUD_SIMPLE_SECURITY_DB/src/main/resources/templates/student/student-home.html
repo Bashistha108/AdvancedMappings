@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+          <link rel="stylesheet" href="/professor-home.css">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Home Page</title>
+
+
+    </head>
+    <body>
+    <div class="container">
+        <h5>Logged in as: <span sec:authentication="principal.username"></span></h5>
+        <h3>Welcome To Student Home Page</h3>
+
+        <a class="btn info"  href="#">View All Courses</a>
+        <a  class="btn info" href="#">View My Courses</a>
+        <a  class="btn info" href="#" >Messages</a>
+
+        <br><br><br><br><br><br>
+        <footer>
+            <form action="#" th:action="@{/logout}" method="POST">
+                <input id="logout-btn" class="btn btn-danger" type="submit" value="Logout">
+            </form>
+        </footer>
+    </div>
+    </body>
+    </html>

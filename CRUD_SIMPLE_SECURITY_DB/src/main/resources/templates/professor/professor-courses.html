@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor Courses</title>
+</head>
+<body>
+    <div>
+        <table>
+            <thead>
+            <th>Course Id</th>
+            <th>Title</th>
+            </thead>
+            <tbody>
+            <tr th:each="course: ${courses}">
+                <td th:text="${course.id}"></td>
+                <td th:text="${course.title}"></td>
+                <td>
+                    <a th:href="@{/delete-course-professor(courseId = ${course.id})}">Delete</a>
+                    <a th:href="@{/showFormForUpdateCourse(courseId = ${course.id})}">Update</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

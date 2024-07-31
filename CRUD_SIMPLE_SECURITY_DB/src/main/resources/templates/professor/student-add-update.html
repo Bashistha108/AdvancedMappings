@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Add/Update Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-wrapper">
+            <h3 style="font-family:helvetica">Student Add / Update</h3>
+            <form action="#" th:action="@{/saveStudent}" th:object="${studentForm}" method="POST">
+                <input type="hidden" th:field="*{student.id}">
+                <input type="text" th:field="*{student.firstName}" placeholder="First Name">
+                <input type="text" th:field="*{student.lastName}" placeholder="Last Name">
+                <input type="text" th:field="*{student.email}" placeholder="Email">
+
+                <input type="hidden" th:field="*{studentDetails.id}">
+                <input id="roleInput" type="text" th:field="*{studentDetails.role}" placeholder="Role">
+                <input  id="passwordInput" type="text" th:field="*{studentDetails.password}" placeholder="Password">
+
+
+                <button type="submit">Save</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        document.getElementById('roleInput').addEventListener('blur', function() {
+            let roleInput = document.getElementById('roleInput');
+            if (roleInput.value) {
+                let formattedRole = roleInput.value.toUpperCase();
+                if (!formattedRole.startsWith('ROLE_')) {
+                    roleInput.value = 'ROLE_' + formattedRole;
+                } else {
+                    roleInput.value = formattedRole;
+                }
+            }
+        });
+
+        document.getElementById('passwordInput').addEventListener('blur', function() {
+            let passwordInput = document.getElementById('passwordInput');
+            if (passwordInput.value && !passwordInput.value.startsWith('{noop}')) {
+                passwordInput.value = '{noop}' + passwordInput.value;
+            }
+        });
+    </script>
+
+</body>
+</html>
