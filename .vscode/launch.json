@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FinalAdvancedMappingsApplication<FinalAdvancedMappings>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ende.FinalAdvancedMappings.FinalAdvancedMappingsApplication",
+            "projectName": "FinalAdvancedMappings",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

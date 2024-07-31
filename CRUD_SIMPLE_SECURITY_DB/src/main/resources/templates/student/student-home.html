@@ -15,7 +15,7 @@
         <h5>Logged in as: <span sec:authentication="principal.username"></span></h5>
         <h3>Welcome To Student Home Page</h3>
 
-        <a class="btn info"  href="#">View All Courses</a>
+        <a class="btn info"  th:href="@{/viewAllCourses}">View All Courses</a>
         <a  class="btn info" href="#">View My Courses</a>
         <a  class="btn info" href="#" >Messages</a>
 
