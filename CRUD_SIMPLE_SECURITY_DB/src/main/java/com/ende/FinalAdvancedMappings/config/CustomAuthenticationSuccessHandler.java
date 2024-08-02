@@ -30,7 +30,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             String authority = grantedAuthority.getAuthority();
             if (authority.equals("ROLE_PROFESSOR") || authority.equals("ROLE_DEAN") ||
                     authority.equals("ROLE_MATH") || authority.equals("ROLE_PHYSICS") ||
-                    authority.equals("ROLE_CS") || authority.equals("ROLE_CHEMISTRY")) {
+                    authority.equals("ROLE_CS") || authority.equals("ROLE_TEST")) {
                 isProfessor = true;
                 break;
             } else if (authority.equals("ROLE_STUDENT") ||authority.equals("ROLE_VERTRETER")) {
