@@ -1,16 +1,25 @@
 package com.ende.FinalAdvancedMappings.controller;
 
-import com.ende.FinalAdvancedMappings.entity.Professor;
-import com.ende.FinalAdvancedMappings.entity.ProfessorDetails;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ende.FinalAdvancedMappings.config.CustomUserDetails;
+import com.ende.FinalAdvancedMappings.entity.Course;
 import com.ende.FinalAdvancedMappings.entity.Student;
 import com.ende.FinalAdvancedMappings.entity.StudentDetails;
 import com.ende.FinalAdvancedMappings.service.ProfessorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 public class StudentController {
@@ -72,6 +81,48 @@ public class StudentController {
         theModel.addAttribute("studentForm", studentForm);
         return "professor/student-add-update";
     }
+
+    @PostMapping("/enroll")
+    public String enrollInACourse(@RequestParam int courseId) {
+       
+        System.out.println("Received courseId: " + courseId);
+    
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
+        int studentId = userDetails.getId();
+
+        List<Course> courses = new ArrayList<>();
+        Course course = profService.findCourseById(courseId);
+        courses.add(course); 
+        profService.setCoursesForStudent(courses, studentId);
+        return "redirect:/viewAllCourses";
+    }
+    @GetMapping("/myCourses")
+    public String myCourses(Model model) {
+    
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
+        int studentId = userDetails.getId();
+        Student student = profService.findStudentById(studentId);
+        List<Course> courses = student.getCourses();
+        model.addAttribute("courses",courses);
+        return "course/student-courses";
+    }
+
+    @PostMapping("/unroll")
+    public String unrollCourse(@RequestParam int courseId){
+        Course course = profService.findCourseById(courseId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
+        int studentId = userDetails.getId();
+        Student student = profService.findStudentById(studentId);
+        List<Course> courses = student.getCourses();
+        courses.remove(course);
+        profService.updateStudent(student);
+        return "redirect:/myCourses";
+    }
+    
+    
 
 
 

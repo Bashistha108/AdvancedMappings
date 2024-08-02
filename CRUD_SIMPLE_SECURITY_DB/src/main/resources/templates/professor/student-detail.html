@@ -17,7 +17,7 @@
         <br>
         <a  class="delete-btn" th:href="@{/delete-student(studentId = ${student.id})}">Delete</a>
         <a  class="update-btn" th:href="@{/showFormForUpdateStudent(studentId = ${student.id})}">Update</a><br>
-        <a class="view-course" href="#">View Courses</a>
+        <a class="view-course" th:href="@{/viewAllCourses}">View Courses</a>
         <a class="view-course" href="#">Send Message</a>
         <a class="view-course" href="#">Give Assignment</a>
 
