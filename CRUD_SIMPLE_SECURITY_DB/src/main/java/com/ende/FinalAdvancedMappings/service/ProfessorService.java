@@ -25,6 +25,7 @@ public interface ProfessorService {
 //    void updateCourse(Course course);
     void deleteCourseById(int id);
     void deleteAllCourse();
+    boolean isEnrolled(int studentId, int courseId);
     Professor findProfessorByCourseId(int id);
 
 

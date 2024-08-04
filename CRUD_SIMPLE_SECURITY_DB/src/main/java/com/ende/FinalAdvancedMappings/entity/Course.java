@@ -34,6 +34,9 @@ public class Course {
     )
     private List<Student> students;
 
+    @Transient
+    private boolean isEnrolled;
+
 
     public Course() {
     }
@@ -89,6 +92,14 @@ public class Course {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public boolean isEnrolled() {
+        return isEnrolled;
+    }
+
+    public void setEnrolled(boolean isEnrolled) {
+        this.isEnrolled = isEnrolled;
     }
 
     @Override
