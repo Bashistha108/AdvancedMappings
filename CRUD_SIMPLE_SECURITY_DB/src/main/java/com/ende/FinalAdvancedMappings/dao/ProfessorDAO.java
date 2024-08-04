@@ -1,9 +1,13 @@
 package com.ende.FinalAdvancedMappings.dao;
 
-import com.ende.FinalAdvancedMappings.entity.*;
-
-import java.sql.SQLException;
 import java.util.List;
+
+import com.ende.FinalAdvancedMappings.entity.Course;
+import com.ende.FinalAdvancedMappings.entity.Professor;
+import com.ende.FinalAdvancedMappings.entity.ProfessorDetails;
+import com.ende.FinalAdvancedMappings.entity.Review;
+import com.ende.FinalAdvancedMappings.entity.Student;
+import com.ende.FinalAdvancedMappings.entity.StudentDetails;
 
 public interface ProfessorDAO {
 
@@ -26,6 +30,7 @@ public interface ProfessorDAO {
     void deleteCourseById(int id);
     void deleteAllCourse();
     Professor findProfessorByCourseId(int id);
+    boolean isEnrolled(int studentId, int courseId);
 
 
     void addReview(Review review, int courseId);

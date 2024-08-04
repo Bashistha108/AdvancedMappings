@@ -2,6 +2,9 @@ package com.ende.FinalAdvancedMappings.controller;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ende.FinalAdvancedMappings.config.CustomUserDetails;
 import com.ende.FinalAdvancedMappings.entity.Course;
 import com.ende.FinalAdvancedMappings.entity.Professor;
 import com.ende.FinalAdvancedMappings.service.ProfessorService;
@@ -67,7 +71,18 @@ public class CourseController {
 
     @GetMapping("/viewAllCourses")
     public String viewAllCourses(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        int studentId = userDetails.getId();
+
         List<Course> courses = profService.findAllCourses();
+
+        for(Course course: courses){
+            boolean isEnrolled = profService.isEnrolled(studentId, course.getId());
+            course.setEnrolled(isEnrolled);
+        }
+
         model.addAttribute("courses", courses);
         return "course/all-courses";
     }

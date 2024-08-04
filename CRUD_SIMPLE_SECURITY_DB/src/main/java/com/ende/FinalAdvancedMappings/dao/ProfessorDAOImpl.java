@@ -203,6 +203,18 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     }
 
     @Override
+    public boolean isEnrolled(int studentId, int courseId){
+        Student student = findStudentById(studentId);
+        List<Course> courses = student.getCourses();
+        for(Course course: courses){
+            if(course.getId() == courseId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     @Transactional
     public void addReview(Review review, int courseId){
         Course course = entityManager.find(Course.class, courseId);
