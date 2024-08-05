@@ -26,7 +26,7 @@ public interface ProfessorService {
     void deleteCourseById(int id);
     void deleteAllCourse();
     boolean isEnrolled(int studentId, int courseId);
-    Professor findProfessorByCourseId(int id);
+  
 
 
     void addReview(Review review, int courseId);

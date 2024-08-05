@@ -115,10 +115,7 @@ public class ProfessorServiceImpl implements ProfessorService{
         return profDAO.isEnrolled(studentId, courseId);
     }
 
-    @Override
-    public Professor findProfessorByCourseId(int id) {
-        return null;
-    }
+    
 
 
     @Override
