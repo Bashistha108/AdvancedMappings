@@ -15,7 +15,7 @@
                 <th>Id</th>
                 <th>Title</th>
                 <th>Professor</th>
-                <th>Action</th>
+                <th th:if="${isStudent}">Action</th>
             </thead>
             <tbody>
                 <tr th:each="course:${courses}">
@@ -23,16 +23,19 @@
                     <td th:text="${course.title}"></td>
                     <td th:if="${course.professor != null and course.professor.email != null}" th:text="${course.professor.email}"></td>
                     <td th:if="${course.professor == null or course.professor.email == null}">No Professor Assigned</td>
-                    <td><form action="#" th:action="@{/unroll}" method="post">
+                    <td><form action="#" th:action="@{/unroll}" th:if="${isStudent}" method="post">
                         <input type="hidden" name="courseId" th:value="${course.id}">
-                        <button type="submit">Unroll</button>
+                        <button type="submit"  >Unroll</button>
                     </form></td>
                 </tr>
             </tbody>
         </table>
         <hr>
-        <br>
-        <a class="btn btn-info" th:href="@{/student-home}">Student Home</a>
+        <br> 
+
+        <a class="btn btn-info" th:href="@{/student-home}" th:if="${isStudent}">Student Home</a>
+        <a class="btn btn-info" th:href="@{/professor-home}" th:if="${isProfessor}">Professor Home</a>
+
     </div>
 </body>
 </html>

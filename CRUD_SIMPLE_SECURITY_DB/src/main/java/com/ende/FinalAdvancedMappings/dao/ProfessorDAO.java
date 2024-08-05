@@ -55,4 +55,6 @@ public interface ProfessorDAO {
     void setCoursesForStudent(List<Course> courses, int studentId);
 
 
+    boolean isStudent(int studentÍd);
+    boolean isProfessor(int professorId);
 }

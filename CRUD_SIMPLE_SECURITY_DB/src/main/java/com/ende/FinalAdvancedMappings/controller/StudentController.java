@@ -103,10 +103,26 @@ public class StudentController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
         int studentId = userDetails.getId();
-        Student student = profService.findStudentById(studentId);
-        List<Course> courses = student.getCourses();
-        model.addAttribute("courses",courses);
-        return "course/student-courses";
+
+        if (userDetails.isStudent()) {
+            Student student = profService.findStudentById(studentId);
+            List<Course> courses = student.getCourses();
+    
+            model.addAttribute("courses", courses);
+            model.addAttribute("isStudent", true);
+            model.addAttribute("isProfessor", false);
+            return "course/student-courses"; 
+    
+        } else{
+            Student student = profService.findStudentById(studentId);
+            List<Course> courses = student.getCourses();
+            model.addAttribute("courses", courses);
+            model.addAttribute("isStudent", false);
+            model.addAttribute("isProfessor", true);
+            return "course/student-courses";
+        }
+    
+        
     }
 
     @PostMapping("/unroll")

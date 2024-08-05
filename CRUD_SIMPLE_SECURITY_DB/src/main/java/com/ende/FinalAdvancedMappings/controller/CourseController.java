@@ -2,7 +2,6 @@ package com.ende.FinalAdvancedMappings.controller;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -75,13 +74,14 @@ public class CourseController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         int studentId = userDetails.getId();
-
+        
         List<Course> courses = profService.findAllCourses();
 
         for(Course course: courses){
             boolean isEnrolled = profService.isEnrolled(studentId, course.getId());
             course.setEnrolled(isEnrolled);
         }
+        
 
         model.addAttribute("courses", courses);
         return "course/all-courses";
