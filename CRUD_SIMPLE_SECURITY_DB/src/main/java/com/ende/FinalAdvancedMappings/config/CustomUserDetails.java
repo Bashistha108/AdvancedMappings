@@ -60,4 +60,19 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    private boolean hasRole(String role) {
+        return authorities.stream()
+                          .anyMatch(authority -> authority.getAuthority().equals(role));
+    }
+
+    // Check if the user is a student
+    public boolean isStudent() {
+        return hasRole("ROLE_STUDENT") || hasRole("ROLE_VERTRETER");
+    }
+
+    // Check if the user is a professor or dean
+    public boolean isProfessor() {
+        return hasRole("ROLE_PROFESSOR") || hasRole("ROLE_DEAN")|| hasRole("ROLE_CS")|| hasRole("ROLE_CHEMISTRY")|| hasRole("ROLE_PHYSICS")|| hasRole("ROLE_MATH");
+    }
 }

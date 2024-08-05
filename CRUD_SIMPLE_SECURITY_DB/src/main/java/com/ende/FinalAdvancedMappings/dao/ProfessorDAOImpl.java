@@ -334,6 +334,26 @@ public class ProfessorDAOImpl implements ProfessorDAO{
     }
 
 
+    @Override
+    public boolean isStudent(int studentId){
+        
+        Student student = findStudentById(studentId);
+        if(student!=null){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isProfessor(int professorId){
+
+        Professor professor = findProfessorById(professorId);
+        if(professor!=null){
+            return true;
+        }
+        return false;
+    }
+
 }
 
 

@@ -47,4 +47,8 @@ public interface ProfessorService {
 
     void setStudentsForCourse(List<Student> students, int courseId);
     void setCoursesForStudent(List<Course> courses, int studentId);
+
+    boolean isStudent(int studentId);
+    boolean isProfessor(int professorId);
+
 }

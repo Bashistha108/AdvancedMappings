@@ -203,6 +203,16 @@ public class ProfessorServiceImpl implements ProfessorService{
     public void setCoursesForStudent(List<Course> courses, int studentId) {
         profDAO.setCoursesForStudent(courses, studentId);
     }
+
+    @Override
+    public boolean isStudent(int studentId){
+        return profDAO.isStudent(studentId);
+    }
+
+    @Override
+    public boolean isProfessor(int professorId){
+        return profDAO.isProfessor(professorId);
+    }
 }
 
 
