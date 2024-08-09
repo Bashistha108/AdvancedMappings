@@ -109,7 +109,7 @@ public class Course {
     }
 
     public int getNumberOfEnrolledStudents(){
-        return this.numberOfEnrolledStudents;
+        return (students != null)?students.size():0;
     }
 
     @Override
