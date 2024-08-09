@@ -12,7 +12,10 @@
     <p>Title: <span th:text="${course.title}"></span></p>
     <p>Professor Id: <span th:if="${course.professor != null}" th:text="${course.professor.id}"></span></p>
     <span th:unless="${course.professor != null}">No Professor</span>
-    <span>Number of Students Enrolled: 0</span>
+    <p>
+        <span>Number of Students Enrolled:</span>
+        <span th:text="${course.numberOfEnrolledStudents}"></span>
+    </p>
     <div class="btn-container">
         <a class="delete-btn"  th:href="@{/delete-course(courseId = ${course.id})}">Delete</a>
         <a class="update-btn" th:href="@{/showFormForUpdateCourse(courseId = ${course.id})}">Update</a>

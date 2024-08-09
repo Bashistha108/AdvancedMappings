@@ -89,14 +89,28 @@ public class StudentController {
         System.out.println("Received courseId: " + courseId);
     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         int studentId = userDetails.getId();
-
-        List<Course> courses = new ArrayList<>();
+        Student student = profService.findStudentById(studentId);
+    
         Course course = profService.findCourseById(courseId);
-        courses.add(course); 
-        profService.setCoursesForStudent(courses, studentId);
-        // course.setNumberOfEnrolledStudents(course.getNumberOfEnrolledStudents()+1);
+    
+        // Add the course to the student's list
+        List<Course> courses = student.getCourses();
+        if (!courses.contains(course)) {
+            courses.add(course);
+            student.setCourses(courses);
+        }
+        profService.updateStudent(student);
+    
+        // Add the student to the course's list
+        List<Student> students = course.getStudents();
+        if (!students.contains(student)) {
+            students.add(student);
+            course.setStudents(students);
+        }
+        profService.saveCourse(course, courseId);
+    
         return "redirect:/viewAllCourses";
     }
     @GetMapping("/myCourses/{studentId}")
@@ -114,21 +128,6 @@ public class StudentController {
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isProfessor", !isStudent);
 
-        // if (userDetails.isStudent()) {
-        //     Student student = profService.findStudentById(studentId);
-        //     List<Course> courses = student.getCourses();
-        //     model.addAttribute("courses", courses);
-        //     model.addAttribute("isStudent", true);
-        //     model.addAttribute("isProfessor", false);
-        //     return "course/student-courses"; 
-    
-        // } else{
-        //     Student student = profService.findStudentById(studentId);
-        //     List<Course> courses = student.getCourses();
-        //     model.addAttribute("courses", courses);
-        //     model.addAttribute("isStudent", false);
-        //     model.addAttribute("isProfessor", true);
-        // }
             return "course/student-courses";
         }
     
@@ -144,12 +143,15 @@ public class StudentController {
         int studentId = userDetails.getId();
         Student student = profService.findStudentById(studentId);
         List<Course> courses = student.getCourses();
-        // if(course.getNumberOfEnrolledStudents() >= 1){
-        //     course.setNumberOfEnrolledStudents(course.getNumberOfEnrolledStudents()-1);
-        // }
         courses.remove(course);
+        student.setCourses(courses);
         profService.updateStudent(student);
        
+        List<Student> students = course.getStudents();
+        students.remove(student);
+        course.setStudents(students);
+        profService.saveCourse(course, courseId);
+
         return "redirect:/myCourses/"+studentId;
     }
     
