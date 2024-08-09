@@ -24,6 +24,7 @@ import com.ende.FinalAdvancedMappings.service.ProfessorService;
 @Controller
 public class StudentController {
 
+
     ProfessorService profService;
     @Autowired
     StudentController(ProfessorService profService){
@@ -84,7 +85,7 @@ public class StudentController {
 
     @PostMapping("/enroll")
     public String enrollInACourse(@RequestParam int courseId) {
-       
+        
         System.out.println("Received courseId: " + courseId);
     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -95,47 +96,61 @@ public class StudentController {
         Course course = profService.findCourseById(courseId);
         courses.add(course); 
         profService.setCoursesForStudent(courses, studentId);
+        // course.setNumberOfEnrolledStudents(course.getNumberOfEnrolledStudents()+1);
         return "redirect:/viewAllCourses";
     }
-    @GetMapping("/myCourses")
-    public String myCourses(Model model) {
+    @GetMapping("/myCourses/{studentId}")
+    public String myCourses(Model model, @PathVariable int studentId) {
     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
-        int studentId = userDetails.getId();
+        // int studentId = userDetails.getId();
 
-        if (userDetails.isStudent()) {
-            Student student = profService.findStudentById(studentId);
-            List<Course> courses = student.getCourses();
+        Student student = profService.findStudentById(studentId);
+        List<Course> courses = student.getCourses();
+        model.addAttribute("courses", courses);
+
+        boolean isStudent = userDetails.isStudent();
+        model.addAttribute("isStudent", isStudent);
+        model.addAttribute("isProfessor", !isStudent);
+
+        // if (userDetails.isStudent()) {
+        //     Student student = profService.findStudentById(studentId);
+        //     List<Course> courses = student.getCourses();
+        //     model.addAttribute("courses", courses);
+        //     model.addAttribute("isStudent", true);
+        //     model.addAttribute("isProfessor", false);
+        //     return "course/student-courses"; 
     
-            model.addAttribute("courses", courses);
-            model.addAttribute("isStudent", true);
-            model.addAttribute("isProfessor", false);
-            return "course/student-courses"; 
-    
-        } else{
-            Student student = profService.findStudentById(studentId);
-            List<Course> courses = student.getCourses();
-            model.addAttribute("courses", courses);
-            model.addAttribute("isStudent", false);
-            model.addAttribute("isProfessor", true);
+        // } else{
+        //     Student student = profService.findStudentById(studentId);
+        //     List<Course> courses = student.getCourses();
+        //     model.addAttribute("courses", courses);
+        //     model.addAttribute("isStudent", false);
+        //     model.addAttribute("isProfessor", true);
+        // }
             return "course/student-courses";
         }
     
-        
-    }
+    
+    
 
     @PostMapping("/unroll")
     public String unrollCourse(@RequestParam int courseId){
+        
         Course course = profService.findCourseById(courseId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
         int studentId = userDetails.getId();
         Student student = profService.findStudentById(studentId);
         List<Course> courses = student.getCourses();
+        // if(course.getNumberOfEnrolledStudents() >= 1){
+        //     course.setNumberOfEnrolledStudents(course.getNumberOfEnrolledStudents()-1);
+        // }
         courses.remove(course);
         profService.updateStudent(student);
-        return "redirect:/myCourses";
+       
+        return "redirect:/myCourses/"+studentId;
     }
     
     

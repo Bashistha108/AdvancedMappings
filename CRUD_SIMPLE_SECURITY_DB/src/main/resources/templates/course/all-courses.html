@@ -25,7 +25,7 @@
                     <td th:if="${course.professor == null or course.professor.email == null}">No Professor Assigned</td>
                     <td><form action="#" th:action="@{/enroll}" method="post">
                         <input type="hidden" name="courseId" th:value="${course.id}">
-                        <button type="submit" th:disabled="${course.enrolled}" th:text="${course.enrolled} ? 'Already Enrolled' : 'Enroll'">
+                        <button class="btn btn-success" type="submit" th:disabled="${course.enrolled}" th:text="${course.enrolled} ? 'Already Enrolled' : 'Enroll'">
                         </button>
                     </form></td>
                 </tr>

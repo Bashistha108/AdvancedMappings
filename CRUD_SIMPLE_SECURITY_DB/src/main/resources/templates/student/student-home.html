@@ -16,7 +16,7 @@
         <h3>Welcome To Student Home Page</h3>
 
         <a class="btn info"  th:href="@{/viewAllCourses}">View All Courses</a>
-        <a  class="btn info" th:href="@{/myCourses}">View My Courses</a>
+        <a  class="btn info" th:href="@{/myCourses/{studentId}(studentId=${studentId})}">View My Courses</a>
         <a  class="btn info" href="#" >Messages</a>
 
         <br><br><br><br><br><br>

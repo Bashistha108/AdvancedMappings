@@ -37,6 +37,8 @@ public class Course {
     @Transient
     private boolean isEnrolled;
 
+    @Transient
+    private int numberOfEnrolledStudents = 0;
 
     public Course() {
     }
@@ -100,6 +102,14 @@ public class Course {
 
     public void setEnrolled(boolean isEnrolled) {
         this.isEnrolled = isEnrolled;
+    }
+
+    public void setNumberOfEnrolledStudents(int numberOfEnrolledStudents){
+        this.numberOfEnrolledStudents = numberOfEnrolledStudents;
+    }
+
+    public int getNumberOfEnrolledStudents(){
+        return this.numberOfEnrolledStudents;
     }
 
     @Override

@@ -25,7 +25,7 @@
                     <td th:if="${course.professor == null or course.professor.email == null}">No Professor Assigned</td>
                     <td><form action="#" th:action="@{/unroll}" th:if="${isStudent}" method="post">
                         <input type="hidden" name="courseId" th:value="${course.id}">
-                        <button type="submit"  >Unroll</button>
+                        <button type="submit" class="btn btn-danger" >Unroll</button>
                     </form></td>
                 </tr>
             </tbody>

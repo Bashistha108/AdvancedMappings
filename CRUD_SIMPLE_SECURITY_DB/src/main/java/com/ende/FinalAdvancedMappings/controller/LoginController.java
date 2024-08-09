@@ -2,13 +2,19 @@ package com.ende.FinalAdvancedMappings.controller;
 
 import com.ende.FinalAdvancedMappings.entity.Professor;
 import com.ende.FinalAdvancedMappings.service.ProfessorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.ende.FinalAdvancedMappings.config.CustomUserDetails;
 
 @Controller
 public class LoginController {
@@ -31,7 +37,11 @@ public class LoginController {
     }
 
     @GetMapping("/student-home")
-    public String studentHome(){
+    public String studentHome(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails)authentication.getPrincipal();
+        int studentId = userDetails.getId();
+        model.addAttribute("studentId", studentId); 
         return "student/student-home";
     }
 
